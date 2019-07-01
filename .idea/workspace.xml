@@ -10,16 +10,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/豆粕-豆油(长期跟踪模型)/国际豆类3品种框架/A_M_Y_Spread_USA.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1751">
-              <caret line="111" selection-start-line="111" selection-start-column="2" selection-end-line="119" selection-end-column="32" />
+            <state relative-caret-position="102">
+              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/豆粕-豆油(长期跟踪模型)/国内粕油/M_Y_Spread_China.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="15" column="24" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -28,6 +40,7 @@
         <option value="$PROJECT_DIR$/豆粕-豆油(长期跟踪模型)/国内粕油/M_Y_Spread_USA.py" />
         <option value="$PROJECT_DIR$/豆粕-豆油(长期跟踪模型)/国际粕油/M_Y_Spread_USA.py" />
         <option value="$PROJECT_DIR$/豆粕-豆油(长期跟踪模型)/国际豆类3品种框架/A_M_Y_Spread_USA.py" />
+        <option value="$PROJECT_DIR$/豆粕-豆油(长期跟踪模型)/国内粕油/M_Y_Spread_China.py" />
       </list>
     </option>
   </component>
@@ -37,6 +50,7 @@
     <option name="width" value="996" />
     <option name="height" value="670" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -74,6 +88,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunDashboard">
@@ -178,7 +193,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Python Console" />
@@ -186,7 +201,7 @@
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3298611" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.33216783" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -220,13 +235,6 @@
     <entry file="file://$PROJECT_DIR$/豆粕-豆油(长期跟踪模型)/国内粕油/wxid_b0wjrzrh4uud21_1479700460615_94.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/豆粕-豆油(长期跟踪模型)/国内粕油/M_Y_Spread_China.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="109">
-          <caret line="95" lean-forward="true" selection-end-line="108" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/豆粕-豆油(长期跟踪模型)/国际粕油/M_Y_Spread_USA.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="143">
@@ -236,8 +244,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/豆粕-豆油(长期跟踪模型)/国际豆类3品种框架/A_M_Y_Spread_USA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1751">
-          <caret line="111" selection-start-line="111" selection-start-column="2" selection-end-line="119" selection-end-column="32" />
+        <state relative-caret-position="102">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/豆粕-豆油(长期跟踪模型)/国内粕油/M_Y_Spread_China.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="15" column="24" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
         </state>
       </provider>
     </entry>

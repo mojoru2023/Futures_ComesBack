@@ -1,0 +1,27 @@
+# 环境变量设置
+export PATH="$PATH:/home/r/pycharm/bin:/home/r/PYENV/bin:/home/r/Daily5Ms_sql/shell_S:/home/r/Daily5Ms_sql/DataA_S:/home/r/Daily5Ms_sql/Spiders_S:/home/r/Daily5Ms_sql/SQL_S:/home/r/Daily5Ms_sql/DataA_S/A_stocks:/home/r/Daily5Ms_sql/SQL_S/5sqls:/home/r/A_J_2markets:/home/r/Futures_ComesBack"
+
+
+# 必须要进入root用户权限才能进行设置！
+# 命令简化设置
+alias sa="source activate"  # python环境
+alias csa="cd /home/r/A_J_2markets/A股接口编写" # 进入A股可视化目录
+alias csj="cd /home/r/A_J_2markets/J股接口编写"  #进入J股可视化目录
+alias cua="cd /home/r/Futures_ComesBack/A_M_Y/US"  #进入 国际豆类跨商品目录
+alias cca="/home/r/Futures_ComesBack/A_M_Y/China"  # 进入国内豆类跨商品目录
+
+
+# python脚本运行简化
+alias pap="python a50_onestock.py" 
+alias pjp="python J225_OneStock.py"
+alias pua="python A_M_Y_Spread_USA.py"
+alias pca="python M_Y_Spread_China.py"
+
+ 
+# 增加可视化的脚本
+
+alias papa="python Astock_backApi.py"
+alias pjpa="python Jstock_backApi.py"
+
+
+# 基本流程是 sa  css  pap...
