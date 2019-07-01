@@ -54,7 +54,11 @@ def parse_A_M_J_Spread():
 
 
 
-
+def float_2_str(item):
+    f_item = float(item)
+    ff_item = round(f_item,2)
+    ff_str_item = str(ff_item)
+    return ff_str_item
 
 
 
@@ -88,10 +92,14 @@ if __name__ == '__main__':
         A = big_list[0]
         M = big_list[1]
         Y = big_list[2]
-        A_Y_Spread = float(A) - float(Y)
-        M_Y_Spread = float(M) - float(Y)
-        big_list.append(str(A_Y_Spread))
-        big_list.append(str(M_Y_Spread))
+        f_A_Y_Spread = float(A) - float(Y)
+        A_Y_Spread =  float_2_str(f_A_Y_Spread)
+
+        f_M_Y_Spread = float(M) - float(Y)
+        M_Y_Spread = float_2_str(f_M_Y_Spread)
+
+        big_list.append(A_Y_Spread)
+        big_list.append(M_Y_Spread)
 
         driver.quit()
 

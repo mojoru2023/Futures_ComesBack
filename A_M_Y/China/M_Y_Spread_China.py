@@ -69,6 +69,12 @@ def insertDB(content):
 
 
 
+def float_2_str(item):
+    f_item = float(item)
+    ff_item = round(f_item,2)
+    ff_str_item = str(ff_item)
+    return ff_str_item
+
 if __name__ == '__main__':
 
     while True:
@@ -80,8 +86,10 @@ if __name__ == '__main__':
         parse_M_J_Spread()
         M = big_list[0]
         Y = big_list[1]
-        M_Y_Spread = int(M) - int(Y)
-        big_list.append(str(M_Y_Spread))
+        f_M_Y_Spread = int(M) - int(Y)
+        # 将计算结果取两位变成浮点数，同事再取两位数
+        M_Y_Spread = float_2_str(f_M_Y_Spread)
+        big_list.append(M_Y_Spread)
 
         driver.quit()
 
