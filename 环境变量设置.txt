@@ -8,7 +8,7 @@ alias sa="source activate"  # python环境
 alias csa="cd /home/r/A_J_2markets/A股接口编写" # 进入A股可视化目录
 alias csj="cd /home/r/A_J_2markets/J股接口编写"  #进入J股可视化目录
 alias cua="cd /home/r/Futures_ComesBack/A_M_Y/US"  #进入 国际豆类跨商品目录
-alias cca="/home/r/Futures_ComesBack/A_M_Y/China"  # 进入国内豆类跨商品目录
+alias cca="cd /home/r/Futures_ComesBack/A_M_Y/China"  # 进入国内豆类跨商品目录
 
 
 # python脚本运行简化
