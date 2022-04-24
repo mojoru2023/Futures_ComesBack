@@ -2,42 +2,42 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="32c8b34c-0fcd-41be-a05c-81855f16ac55" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/A_M_Y/China/M_Y_Spread_China.py" beforeDir="false" afterPath="$PROJECT_DIR$/A_M_Y/China/M_Y_Spread_China.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_M_Y/US/A_M_Y_Spread_USA.py" beforeDir="false" afterPath="$PROJECT_DIR$/A_M_Y/US/A_M_Y_Spread_USA.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/国内期货跟踪/1.外部数据源思路/文化财经python接口/test_whorder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/A_M_Y/China/M_Y_Spread_China.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/A_M_Y/China/wxid_b0wjrzrh4uud21_1479700460615_94.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/A_M_Y/China/wxid_b0wjrzrh4uud21_1479701169226_41.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/A_M_Y/US/A_M_Y_Spread_USA.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/关注美国农业办.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/只专注内外豆类市场(模拟交易日记)(还是外盘为主，兼顾贸易).xls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/国内期货跟踪/Daily_fetch_dt.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/国内期货跟踪/national_Futures.config.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/国内期货跟踪/to_find_Trade_One.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/环境变量设置.txt" beforeDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/A_M_Y/China/M_Y_Spread_China.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="71" selection-start-line="71" selection-end-line="75" selection-end-column="22" />
-              <folding>
-                <element signature="e#41#52#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/A_M_Y/US/A_M_Y_Spread_USA.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="97" column="42" lean-forward="true" selection-start-line="97" selection-start-column="42" selection-end-line="97" selection-end-column="42" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -58,6 +58,7 @@
     <option name="width" value="996" />
     <option name="height" value="670" />
   </component>
+  <component name="ProjectId" id="289L6wf0UvYEoaRN3JyyoKGKzx3" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -95,23 +96,15 @@
       <pane id="Scope" />
     </panes>
   </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
-  <component name="RunManager" selected="Python.A_M_Y_Spread_USA">
+  <component name="RunManager" selected="Python.Daily_fetch_dt_from_sina">
     <configuration name="A_M_Y_Spread_USA" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Futures_ComesBack" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -125,6 +118,48 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/豆粕-豆油(长期跟踪模型)/国际豆类3品种框架/A_M_Y_Spread_USA.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Daily_fetch_dt" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Futures_ComesBack" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/国内期货跟踪" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/国内期货跟踪/Daily_fetch_dt.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Daily_fetch_dt_from_sina" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Futures_ComesBack" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/国内期货跟踪/1.外部数据源思路/2.新浪财经" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/国内期货跟踪/1.外部数据源思路/2.新浪财经/Daily_fetch_dt_from_sina.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -154,7 +189,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="M_Y_Spread_USA" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="to_find_Trade_One" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Futures_ComesBack" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -162,11 +197,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/豆粕-豆油(长期跟踪模型)/国内粕油" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/国内期货跟踪" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/豆粕-豆油(长期跟踪模型)/国内粕油/M_Y_Spread_USA.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/国内期货跟踪/to_find_Trade_One.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -177,12 +212,15 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.Daily_fetch_dt_from_sina" />
+        <item itemvalue="Python.Daily_fetch_dt" />
+        <item itemvalue="Python.to_find_Trade_One" />
         <item itemvalue="Python.A_M_Y_Spread_USA" />
         <item itemvalue="Python.M_Y_Spread_China" />
-        <item itemvalue="Python.M_Y_Spread_USA" />
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -218,6 +256,18 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/豆粕-豆油(长期跟踪模型)/国际粕油/M_Y_Spread_China.py" />
