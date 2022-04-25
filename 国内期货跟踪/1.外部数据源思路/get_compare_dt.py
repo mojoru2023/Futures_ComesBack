@@ -54,8 +54,16 @@ def fetch_basedt_minus3dt_minus30dt():
         #  df1_time > df2_time
         df_result = base_df[(base_df[one_params] >= df1_time) & (base_df[one_params] <= df2_time)]
         result_list = df_result.values.tolist()
-        random_list_result = random.choice(result_list)[1:-1]
-        return random_list_result
+        random_list_result1 = random.choice(result_list)[1:-1]
+        random_list_result2 = random.choice(result_list)[1:-1]
+        random_list_result3 = random.choice(result_list)[1:-1]
+        if "--" not in random_list_result1:
+            final_result = random_list_result1
+        elif "--" not in random_list_result2:
+            final_result = random_list_result2
+        elif "--" not in random_list_result3:
+            final_result = random_list_result3
+        return final_result
 
     base_dt_minus3_dt = difference_set_fromTwo_df(df_ZN_Futures,"LastTime",_base_time_minus4,_base_time_minus3)
     base_dt_minus30_dt = difference_set_fromTwo_df(df_ZN_Futures,"LastTime",_base_time_minus30,_base_time_minus29)
@@ -68,6 +76,3 @@ def fetch_basedt_minus3dt_minus30dt():
 
 base_dt,base_dt_minus3_dt,base_dt_minus30_dt = fetch_basedt_minus3dt_minus30dt()
 print(base_dt,base_dt_minus3_dt,base_dt_minus30_dt)
-
-
-
