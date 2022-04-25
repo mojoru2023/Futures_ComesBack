@@ -2,19 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="32c8b34c-0fcd-41be-a05c-81855f16ac55" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/国内期货跟踪/1.外部数据源思路/文化财经python接口/test_whorder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_M_Y/China/M_Y_Spread_China.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_M_Y/China/wxid_b0wjrzrh4uud21_1479700460615_94.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_M_Y/China/wxid_b0wjrzrh4uud21_1479701169226_41.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A_M_Y/US/A_M_Y_Spread_USA.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/关注美国农业办.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/只专注内外豆类市场(模拟交易日记)(还是外盘为主，兼顾贸易).xls" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/国内期货跟踪/Daily_fetch_dt.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/国内期货跟踪/national_Futures.config.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/国内期货跟踪/to_find_Trade_One.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/环境变量设置.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/国内期货跟踪/1.外部数据源思路/get_compare_dt.py" beforeDir="false" afterPath="$PROJECT_DIR$/国内期货跟踪/1.外部数据源思路/get_compare_dt.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/国内期货跟踪/1.外部数据源思路/national_Futures.config.py" beforeDir="false" afterPath="$PROJECT_DIR$/国内期货跟踪/1.外部数据源思路/national_Futures.config.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,28 +94,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
-  <component name="RunManager" selected="Python.Daily_fetch_dt_from_sina">
-    <configuration name="A_M_Y_Spread_USA" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="Futures_ComesBack" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/豆粕-豆油(长期跟踪模型)/国际豆类3品种框架" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/豆粕-豆油(长期跟踪模型)/国际豆类3品种框架/A_M_Y_Spread_USA.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.national_Futures.config">
     <configuration name="Daily_fetch_dt" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Futures_ComesBack" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -168,7 +137,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="M_Y_Spread_China" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="get_compare_dt" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Futures_ComesBack" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -176,11 +145,32 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/豆粕-豆油(长期跟踪模型)/国际粕油" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/国内期货跟踪/1.外部数据源思路" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/豆粕-豆油(长期跟踪模型)/国际粕油/M_Y_Spread_China.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/国内期货跟踪/1.外部数据源思路/get_compare_dt.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="national_Futures.config" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Futures_ComesBack" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/国内期货跟踪/1.外部数据源思路" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/国内期货跟踪/1.外部数据源思路/national_Futures.config.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -212,11 +202,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.national_Futures.config" />
+        <item itemvalue="Python.get_compare_dt" />
         <item itemvalue="Python.Daily_fetch_dt_from_sina" />
         <item itemvalue="Python.Daily_fetch_dt" />
         <item itemvalue="Python.to_find_Trade_One" />
-        <item itemvalue="Python.A_M_Y_Spread_USA" />
-        <item itemvalue="Python.M_Y_Spread_China" />
       </list>
     </recent_temporary>
   </component>
