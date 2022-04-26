@@ -12,6 +12,10 @@ import subprocess
 
 
 
+
+
+
+
 import time
 import random
 from datetime import datetime
@@ -43,26 +47,19 @@ from email.mime.application import MIMEApplication
 import datetime
 
 
+
 def difference_set_fromTwo_df(base_df, one_params, df1_time, df2_time):
     #  df1_time > df2_time
-    final_result =None
-    df_result = base_df[(base_df[one_params] >= df1_time) & (base_df[one_params] <= df2_time)]
+    df_result =base_df[(base_df[one_params] >= df1_time) & (base_df["LastTime"] <= df2_time)]
     result_list = df_result.values.tolist()
-    random_list_result1 = random.choice(result_list)[1:-1]
-    random_list_result2 = random.choice(result_list)[1:-1]
-    random_list_result3 = random.choice(result_list)[1:-1]
-    if "--" not in random_list_result1:
-        final_result = random_list_result1
-    elif "--" not in random_list_result2:
-        final_result = random_list_result2
-    elif "--" not in random_list_result3:
-        final_result = random_list_result3
-    return final_result
+    final_result = random.choice(result_list)
+    final_result_dt = final_result[1:-1]
+    return final_result_dt
+
 def minum_basetime_minus_N_minutes(string_datetime, N_minutes):
     string_datetime = datetime.datetime.strptime(string_datetime, "%Y-%m-%d %H:%M:%S")  # 把strTime转化为时间格式,后面的秒位自动补位的
     minum_basetime_minusN = (string_datetime + datetime.timedelta(minutes=-N_minutes)).strftime("%Y-%m-%d %H:%M:%S")
     return minum_basetime_minusN
-
 def fetch_basedt_minus3dt_minus30dt():
 
     engine_ZN_Futures = create_engine('mysql+pymysql://root:123456@localhost:3306/Futures')
@@ -73,28 +70,16 @@ def fetch_basedt_minus3dt_minus30dt():
     # 取第一行数
     last_row = list(df_ZN_Futures.iloc[0])
     # remove id ,remove lasttime
-    base_id = last_row[0]
     base_dt = last_row[1:-1]
     base_time_string = str(last_row[-1])
-    result_dt = base_dt
+
     _base_time_minus3 = minum_basetime_minus_N_minutes(base_time_string,3)
     _base_time_minus4 = minum_basetime_minus_N_minutes(base_time_string,4)
-    _base_time_minus29 = minum_basetime_minus_N_minutes(base_time_string,29)
+    _base_time_minus25 = minum_basetime_minus_N_minutes(base_time_string,25)
     _base_time_minus30 = minum_basetime_minus_N_minutes(base_time_string,30)
     base_dt_minus3_dt = difference_set_fromTwo_df(df_ZN_Futures,"LastTime",_base_time_minus4,_base_time_minus3)
-    base_dt_minus30_dt = difference_set_fromTwo_df(df_ZN_Futures,"LastTime",_base_time_minus30,_base_time_minus29)
-
-    if "--" in base_dt:
-        engine_ZN_Futures2 = create_engine('mysql+pymysql://root:123456@localhost:3306/Futures')
-        # 逆序取数
-        sql_ZN_Futures2 = 'select * from ZN_Futures where id ={0} ; '.format(base_id-1)
-        # 取第一行数
-        df_ZN_Futures2 = pd.read_sql_query(sql_ZN_Futures2, engine_ZN_Futures2)
-        # 取第一行数
-        last_row2 = list(df_ZN_Futures2.iloc[0])
-        base_dt2 = last_row2[1:-1]
-        result_dt = base_dt2
-    return result_dt,base_dt_minus3_dt,base_dt_minus30_dt
+    base_dt_minus30_dt = difference_set_fromTwo_df(df_ZN_Futures,"LastTime",_base_time_minus30,_base_time_minus25)
+    return base_dt,base_dt_minus3_dt,base_dt_minus30_dt
 
 
 
@@ -122,11 +107,8 @@ def readDatafile(filename):
 
     return sum(call_list),sum(put_list),total_list
 
-call_list,put_list,total_list =  readDatafile("put.txt")
 
-print(call_list)
-print(put_list)
-print(total_list)
+
 def remove_existfile(filename):
     if os.path.exists(filename):
         os.remove(filename)
@@ -137,6 +119,8 @@ def remove_file(filetype):
             if file.split(".")[1] == filetype:
                 os.remove(file)
 def find_and_confirm_signal(tradeone,base_dt,base_dt_minus3,base_dt_minus30,trade_dict):
+
+
     # 识别信号
     if os.path.exists('call{0}.txt'.format(tradeone)) is False and os.path.exists('put{0}.txt'.format(tradeone)) is False:
         # 无文件,进行信号甄别;有文件,就验证信号
@@ -150,6 +134,7 @@ def find_and_confirm_signal(tradeone,base_dt,base_dt_minus3,base_dt_minus30,trad
             open('put{0}.txt'.format(tradeone), mode='w')
         else:
             pass
+
     else: #验证信号
         if os.path.exists('call{0}.txt'.format(tradeone)) is True:
             confirm_signal_dt = base_dt-base_dt_minus3
@@ -266,29 +251,26 @@ if __name__=="__main__":
                               'mm': 36.1, 'MAM': 31.176, 'lm': 197.95, 'im': 45.46, 'FGM': 101.4, 'bum': 62.533,
                               'APM': 117.53}
     while True:
-        use_subprocess_command("python3 Daily_fetch_dt_DF.py")
-        time.sleep(0.1)
-        use_subprocess_command("python3 Daily_fetch_dt_from_sina.py")
-        time.sleep(0.1)
-        use_subprocess_command("python3 Daily_fetch_dt_SecuS.py ")
-        time.sleep(0.1)
-        use_subprocess_command("python3 Daily_fetch_dt_YC.py")
-        time.sleep(0.1)
         e = datetime.datetime.now()
-        base_dt, base_dt_minus3_dt, base_dt_minus30_dt = fetch_basedt_minus3dt_minus30dt()
-        find_and_confirm_signal("ym",base_dt,base_dt_minus3_dt,base_dt_minus30_dt,trade_dict)
-        find_and_confirm_signal("vm",base_dt,base_dt_minus3_dt,base_dt_minus30_dt,trade_dict)
-        find_and_confirm_signal("TAM",base_dt,base_dt_minus3_dt,base_dt_minus30_dt,trade_dict)
-        find_and_confirm_signal("rbm",base_dt,base_dt_minus3_dt,base_dt_minus30_dt,trade_dict)
-        find_and_confirm_signal("pm",base_dt,base_dt_minus3_dt,base_dt_minus30_dt,trade_dict)
-        find_and_confirm_signal("OIM",base_dt,base_dt_minus3_dt,base_dt_minus30_dt,trade_dict)
-        find_and_confirm_signal("mm",base_dt,base_dt_minus3_dt,base_dt_minus30_dt,trade_dict)
-        find_and_confirm_signal("MAM",base_dt,base_dt_minus3_dt,base_dt_minus30_dt,trade_dict)
-        find_and_confirm_signal("lm",base_dt,base_dt_minus3_dt,base_dt_minus30_dt,trade_dict)
-        find_and_confirm_signal("im",base_dt,base_dt_minus3_dt,base_dt_minus30_dt,trade_dict)
-        find_and_confirm_signal("FGM",base_dt,base_dt_minus3_dt,base_dt_minus30_dt,trade_dict)
-        find_and_confirm_signal("bum",base_dt,base_dt_minus3_dt,base_dt_minus30_dt,trade_dict)
-        find_and_confirm_signal("APM",base_dt,base_dt_minus3_dt,base_dt_minus30_dt,trade_dict)
+        print(e)
+        time.sleep(10)
+        base_dt,base_dt_minus3_dt,base_dt_minus30_dt = fetch_basedt_minus3dt_minus30dt()
+        print(base_dt)
+        print(base_dt_minus3_dt)
+        print(base_dt_minus30_dt)
+        find_and_confirm_signal("ym",base_dt,base_dt_minus3_dt,base_dt_minus30_dt,trade_base_params_dict)
+        find_and_confirm_signal("vm",base_dt,base_dt_minus3_dt,base_dt_minus30_dt,trade_base_params_dict)
+        find_and_confirm_signal("TAM",base_dt,base_dt_minus3_dt,base_dt_minus30_dt,trade_base_params_dict)
+        find_and_confirm_signal("rbm",base_dt,base_dt_minus3_dt,base_dt_minus30_dt,trade_base_params_dict)
+        find_and_confirm_signal("pm",base_dt,base_dt_minus3_dt,base_dt_minus30_dt,trade_base_params_dict)
+        find_and_confirm_signal("OIM",base_dt,base_dt_minus3_dt,base_dt_minus30_dt,trade_base_params_dict)
+        find_and_confirm_signal("mm",base_dt,base_dt_minus3_dt,base_dt_minus30_dt,trade_base_params_dict)
+        find_and_confirm_signal("MAM",base_dt,base_dt_minus3_dt,base_dt_minus30_dt,trade_base_params_dict)
+        find_and_confirm_signal("lm",base_dt,base_dt_minus3_dt,base_dt_minus30_dt,trade_base_params_dict)
+        find_and_confirm_signal("im",base_dt,base_dt_minus3_dt,base_dt_minus30_dt,trade_base_params_dict)
+        find_and_confirm_signal("FGM",base_dt,base_dt_minus3_dt,base_dt_minus30_dt,trade_base_params_dict)
+        find_and_confirm_signal("bum",base_dt,base_dt_minus3_dt,base_dt_minus30_dt,trade_base_params_dict)
+        find_and_confirm_signal("APM",base_dt,base_dt_minus3_dt,base_dt_minus30_dt,trade_base_params_dict)
 
 
 
@@ -301,7 +283,7 @@ if __name__=="__main__":
 
 
 
-
+# select * from ZN_Futures  order by id desc limit 10;
 
 
 
