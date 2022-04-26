@@ -260,11 +260,12 @@ def use_subprocess_command(command_string):
 
 
 if __name__=="__main__":
+    # 开始时, 删除所有文本
+    remove_file("txt")
     trade_base_params_dict = {'ym': 106.43, 'vm': 125.85, 'TAM': 117, 'rbm': 70.31, 'pm': 122.95, 'OIM': 131.77,
                               'mm': 36.1, 'MAM': 31.176, 'lm': 197.95, 'im': 45.46, 'FGM': 101.4, 'bum': 62.533,
                               'APM': 117.53}
     while True:
-
         use_subprocess_command("python3 Daily_fetch_dt_DF.py")
         time.sleep(0.1)
         use_subprocess_command("python3 Daily_fetch_dt_from_sina.py")
@@ -275,8 +276,6 @@ if __name__=="__main__":
         time.sleep(0.1)
         e = datetime.datetime.now()
         base_dt, base_dt_minus3_dt, base_dt_minus30_dt = fetch_basedt_minus3dt_minus30dt()
-        # 开始时, 删除所有文本
-        remove_file("txt")
         find_and_confirm_signal("ym",base_dt,base_dt_minus3_dt,base_dt_minus30_dt,trade_dict)
         find_and_confirm_signal("vm",base_dt,base_dt_minus3_dt,base_dt_minus30_dt,trade_dict)
         find_and_confirm_signal("TAM",base_dt,base_dt_minus3_dt,base_dt_minus30_dt,trade_dict)
