@@ -1,6 +1,4 @@
 
-
-
 import os
 import sys
 import time
@@ -60,7 +58,7 @@ def minum_basetime_minus_N_minutes(string_datetime, N_minutes):
     string_datetime = datetime.datetime.strptime(string_datetime, "%Y-%m-%d %H:%M:%S")  # 把strTime转化为时间格式,后面的秒位自动补位的
     minum_basetime_minusN = (string_datetime + datetime.timedelta(minutes=-N_minutes)).strftime("%Y-%m-%d %H:%M:%S")
     return minum_basetime_minusN
-def fetch_basedt_minus3dt_minus30dt():
+def fetch_basedt_minus3dt_minus20dt():
 
     engine_ZN_Futures = create_engine('mysql+pymysql://root:123456@localhost:3306/Futures')
     # 逆序取数
@@ -75,11 +73,11 @@ def fetch_basedt_minus3dt_minus30dt():
 
     _base_time_minus3 = minum_basetime_minus_N_minutes(base_time_string,3)
     _base_time_minus4 = minum_basetime_minus_N_minutes(base_time_string,4)
-    _base_time_minus25 = minum_basetime_minus_N_minutes(base_time_string,25)
-    _base_time_minus30 = minum_basetime_minus_N_minutes(base_time_string,30)
+    _base_time_minus15 = minum_basetime_minus_N_minutes(base_time_string,15)
+    _base_time_minus20 = minum_basetime_minus_N_minutes(base_time_string,20)
     base_dt_minus3_dt = difference_set_fromTwo_df(df_ZN_Futures,"LastTime",_base_time_minus4,_base_time_minus3)
-    base_dt_minus30_dt = difference_set_fromTwo_df(df_ZN_Futures,"LastTime",_base_time_minus30,_base_time_minus25)
-    return base_dt,base_dt_minus3_dt,base_dt_minus30_dt
+    base_dt_minus20_dt = difference_set_fromTwo_df(df_ZN_Futures,"LastTime",_base_time_minus20,_base_time_minus15)
+    return base_dt,base_dt_minus3_dt,base_dt_minus20_dt
 
 
 
@@ -118,7 +116,7 @@ def remove_file(filetype):
         if len(file_list) != 1:
             if file.split(".")[1] == filetype:
                 os.remove(file)
-def find_and_confirm_signal(tradeone,base_dt,base_dt_minus3,base_dt_minus30,trade_dict):
+def find_and_confirm_signal(tradeone,base_dt,base_dt_minus3,base_dt_minus30,trade_dict,find_param,confirm_param):
 
 
     # 识别信号
@@ -126,10 +124,10 @@ def find_and_confirm_signal(tradeone,base_dt,base_dt_minus3,base_dt_minus30,trad
         # 无文件,进行信号甄别;有文件,就验证信号
         find_signal_dt = base_dt-base_dt_minus30
         find_signal_msg = "tradeone is {2} \n time: {1} \n 市场为 {0} ，发现信号！".format(str(find_signal_dt),datetime.now().strftime("%Y-%m-%d %H:%M:%S"),tradeone)
-        if find_signal_dt>trade_dict[tradeone]*0.33:
+        if find_signal_dt>trade_dict[tradeone]*find_param:
             print(find_signal_msg)
             open('call{0}.txt'.format(tradeone), mode='w')
-        elif find_signal_dt < -trade_dict[tradeone]*0.33:
+        elif find_signal_dt < -trade_dict[tradeone]*find_param:
             print(find_signal_msg)
             open('put{0}.txt'.format(tradeone), mode='w')
         else:
@@ -151,7 +149,7 @@ def find_and_confirm_signal(tradeone,base_dt,base_dt_minus3,base_dt_minus30,trad
                 print(msg2)
                 print(msg3)
                 print(msg4)
-                if abs(put_list)-abs(call_list) >trade_dict[tradeone]*0.15:
+                if abs(put_list)-abs(call_list) >trade_dict[tradeone]*confirm_param:
                     msg5 = "做多的信号彻底失败！赶紧离场！"
                     print(msg5)
                     remove_existfile("call{0}.txt")
@@ -174,7 +172,7 @@ def find_and_confirm_signal(tradeone,base_dt,base_dt_minus3,base_dt_minus30,trad
                 print(msg2)
                 print(msg3)
                 print(msg4)
-                if abs(put_list)-abs(call_list) >trade_dict[tradeone]*0.15:
+                if abs(put_list)-abs(call_list) >trade_dict[tradeone]*confirm_param:
                     msg5 = "做多的信号彻底失败！赶紧离场！"
                     print(msg5)
                     remove_existfile("call{0}.txt")
@@ -203,7 +201,7 @@ def find_and_confirm_signal(tradeone,base_dt,base_dt_minus3,base_dt_minus30,trad
                 print(msg2)
                 print(msg3)
                 print(msg4)
-                if abs(call_list)-abs(put_list) >trade_dict[tradeone]*0.15:
+                if abs(call_list)-abs(put_list) >trade_dict[tradeone]*confirm_param:
                     msg5 = "做空的信号彻底失败！赶紧离场！"
                     print(msg5)
                     remove_existfile("put{0}.txt")
@@ -226,7 +224,7 @@ def find_and_confirm_signal(tradeone,base_dt,base_dt_minus3,base_dt_minus30,trad
                 print(msg2)
                 print(msg3)
                 print(msg4)
-                if abs(call_list)-abs(put_list) >trade_dict[tradeone]*0.15:
+                if abs(call_list)-abs(put_list) >trade_dict[tradeone]*confirm_param:
                     msg5 = "做空的信号彻底失败！赶紧离场！"
                     print(msg5)
                     remove_existfile("put{0}.txt")
@@ -253,24 +251,24 @@ if __name__=="__main__":
     while True:
         e = datetime.datetime.now()
         print(e)
-        time.sleep(10)
-        base_dt,base_dt_minus3_dt,base_dt_minus30_dt = fetch_basedt_minus3dt_minus30dt()
+        base_dt,base_dt_minus3_dt,base_dt_minus20_dt = fetch_basedt_minus3dt_minus20dt()
         print(base_dt)
         print(base_dt_minus3_dt)
-        print(base_dt_minus30_dt)
-        find_and_confirm_signal("ym",base_dt,base_dt_minus3_dt,base_dt_minus30_dt,trade_base_params_dict)
-        find_and_confirm_signal("vm",base_dt,base_dt_minus3_dt,base_dt_minus30_dt,trade_base_params_dict)
-        find_and_confirm_signal("TAM",base_dt,base_dt_minus3_dt,base_dt_minus30_dt,trade_base_params_dict)
-        find_and_confirm_signal("rbm",base_dt,base_dt_minus3_dt,base_dt_minus30_dt,trade_base_params_dict)
-        find_and_confirm_signal("pm",base_dt,base_dt_minus3_dt,base_dt_minus30_dt,trade_base_params_dict)
-        find_and_confirm_signal("OIM",base_dt,base_dt_minus3_dt,base_dt_minus30_dt,trade_base_params_dict)
-        find_and_confirm_signal("mm",base_dt,base_dt_minus3_dt,base_dt_minus30_dt,trade_base_params_dict)
-        find_and_confirm_signal("MAM",base_dt,base_dt_minus3_dt,base_dt_minus30_dt,trade_base_params_dict)
-        find_and_confirm_signal("lm",base_dt,base_dt_minus3_dt,base_dt_minus30_dt,trade_base_params_dict)
-        find_and_confirm_signal("im",base_dt,base_dt_minus3_dt,base_dt_minus30_dt,trade_base_params_dict)
-        find_and_confirm_signal("FGM",base_dt,base_dt_minus3_dt,base_dt_minus30_dt,trade_base_params_dict)
-        find_and_confirm_signal("bum",base_dt,base_dt_minus3_dt,base_dt_minus30_dt,trade_base_params_dict)
-        find_and_confirm_signal("APM",base_dt,base_dt_minus3_dt,base_dt_minus30_dt,trade_base_params_dict)
+        print(base_dt_minus20_dt)
+        find_and_confirm_signal("ym",base_dt,base_dt_minus3_dt,base_dt_minus20_dt,trade_base_params_dict,0.22,0.13)
+        find_and_confirm_signal("vm",base_dt,base_dt_minus3_dt,base_dt_minus20_dt,trade_base_params_dict,0.22,0.13)
+        find_and_confirm_signal("TAM",base_dt,base_dt_minus3_dt,base_dt_minus20_dt,trade_base_params_dict,0.22,0.13)
+        find_and_confirm_signal("rbm",base_dt,base_dt_minus3_dt,base_dt_minus20_dt,trade_base_params_dict,0.22,0.13)
+        find_and_confirm_signal("pm",base_dt,base_dt_minus3_dt,base_dt_minus20_dt,trade_base_params_dict,0.22,0.13)
+        find_and_confirm_signal("OIM",base_dt,base_dt_minus3_dt,base_dt_minus20_dt,trade_base_params_dict,0.22,0.13)
+        find_and_confirm_signal("mm",base_dt,base_dt_minus3_dt,base_dt_minus20_dt,trade_base_params_dict,0.22,0.13)
+        find_and_confirm_signal("MAM",base_dt,base_dt_minus3_dt,base_dt_minus20_dt,trade_base_params_dict,0.22,0.13)
+        find_and_confirm_signal("lm",base_dt,base_dt_minus3_dt,base_dt_minus20_dt,trade_base_params_dict,0.22,0.13)
+        find_and_confirm_signal("im",base_dt,base_dt_minus3_dt,base_dt_minus20_dt,trade_base_params_dict,0.22,0.13)
+        find_and_confirm_signal("FGM",base_dt,base_dt_minus3_dt,base_dt_minus20_dt,trade_base_params_dict,0.22,0.13)
+        find_and_confirm_signal("bum",base_dt,base_dt_minus3_dt,base_dt_minus20_dt,trade_base_params_dict,0.22,0.13)
+        find_and_confirm_signal("APM",base_dt,base_dt_minus3_dt,base_dt_minus20_dt,trade_base_params_dict,0.22,0.13)
+        time.sleep(5)
 
 
 
@@ -284,15 +282,3 @@ if __name__=="__main__":
 
 
 # select * from ZN_Futures  order by id desc limit 10;
-
-
-
-
-
-
-
-
-
-
-
-
