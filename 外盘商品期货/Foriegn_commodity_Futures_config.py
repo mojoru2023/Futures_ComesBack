@@ -8,3 +8,11 @@ COMEX铜HG00Y
 糖11号当月连续SB00Y
 棉花当月连续CT00Y
 棕榈油当月连续MPM00Y
+
+
+https://cn.investing.com/commodities/us-sugar-no11
+  
+  
+  http://quote.eastmoney.com/globalfuture/SB00Y.html
+    
+    http://finance.sina.com.cn/money/future/hf.html
