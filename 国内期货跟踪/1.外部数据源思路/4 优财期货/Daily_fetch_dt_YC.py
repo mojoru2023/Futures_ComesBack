@@ -12,9 +12,9 @@ from itertools import chain
 import pymysql
 from queue import Queue
 import threading
-
+from func_timeout import func_set_timeout
 from lxml import etree
-
+import func_timeout
 # selenium 3.12.0
 from selenium.webdriver import PhantomJS
 
@@ -123,22 +123,20 @@ def list_dict(list_data):
         dict_data[key] = value
     return dict_data
 
-if __name__=="__main__":
-    s = datetime.datetime.now()
 
-    final_dt =[]
-    #制只锁定在 10个左右 # 内存太小了，所以这次先缩减在6-7
-    forSort_futurescode =["豆油主力","PVC主力","PTA主力","螺纹钢主力","棕榈油主力","菜籽油主力","豆粕主力","甲醇主力","聚乙烯主力","铁矿石主力","玻璃主力","沥青主力","苹果主力"]
-
-    url_list = ["http://www.ucai123.com/datas-zgqhhq"]
+def is_need_retry(exception:Exception)->bool:
+    return isinstance(exception,func_timeout.exceptions.FunctionTimedOut)
+import timeout_decorator
+@timeout_decorator.timeout(20)
+def collection_func():
     sst = ZG_Futures()
     sst.run()
-    e =  datetime.datetime.now()
-    f = e-s
+    e = datetime.datetime.now()
+    f = e - s
     print(final_dt)
-# [{'rbm': '4960'}, {'TAM': '6182'}, {'im': '875.5'}, {'ppm': '8697'}, {'jmm': '3003.0'}, {'pm': '11470'}, {'mm': '4062'}, {'jm': '3799.5'}]
+    # [{'rbm': '4960'}, {'TAM': '6182'}, {'im': '875.5'}, {'ppm': '8697'}, {'jmm': '3003.0'}, {'pm': '11470'}, {'mm': '4062'}, {'jm': '3799.5'}]
 
- # 异步之后还要排序
+    # 异步之后还要排序
     f_tuple = tuple([list_dict(final_dt)[x] for x in forSort_futurescode])
     print(f_tuple)
     # 每10秒插入一次
@@ -146,6 +144,16 @@ if __name__=="__main__":
     print(final_dt)
     print(f)
     sys.exit(0)
+
+if __name__=="__main__":
+    s = datetime.datetime.now()
+
+    final_dt =[]
+    #制只锁定在 10个左右 # 内存太小了，所以这次先缩减在6-7
+    forSort_futurescode =["豆油主力","PVC主力","PTA主力","螺纹钢主力","棕榈油主力","菜籽油主力","豆粕主力","甲醇主力","聚乙烯主力","铁矿石主力","玻璃主力","沥青主力","苹果主力"]
+    url_list = ["http://www.ucai123.com/datas-zgqhhq"]
+    collection_func()
+
 
 
 

@@ -22,18 +22,18 @@ def use_subprocess_command(command_string):
 if __name__=="__main__":
     while True:
         use_subprocess_command("python3 Daily_fetch_dt_DF.py")
-        time.sleep(0.1)
-        use_subprocess_command("python3 Daily_fetch_dt_from_sina.py")
-        time.sleep(0.1)
+        time.sleep(2)
+        use_subprocess_command("python3 Daily_fetch_dt_sina.py")
+        time.sleep(2)
         use_subprocess_command("python3 Daily_fetch_dt_SecuS.py ")
-        time.sleep(0.1)
+        time.sleep(2)
         use_subprocess_command("python3 Daily_fetch_dt_YC.py")
-        time.sleep(0.1)
+        time.sleep(2)
         e = datetime.datetime.now()
         print(e)
         f = e - s
         print(f)
-        sys.exit(0)
+
 
 # 放弃计划任务,还是跟服务器性能有关
 

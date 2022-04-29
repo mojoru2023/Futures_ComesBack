@@ -8,16 +8,18 @@ import time
 import copy
 import re
 import datetime
-from func_timeout import func_set_timeout
+from itertools import chain
 import pymysql
 from queue import Queue
 import threading
 import func_timeout
 from lxml import etree
-import timeout_decorator
+import retrying
+from lxml import etree
+from func_timeout import func_set_timeout
 # selenium 3.12.0
 from selenium.webdriver import PhantomJS
-
+import timeout_decorator
 
 def run_forever(func):
     def wrapper(obj):
@@ -49,13 +51,12 @@ class ZG_Futures(object):
         url = self.url_queue.get()
 
         html= use_selenium_headless_getdt(url)
-
         selector = etree.HTML(html)
-        last_price = selector.xpath('//*[@id="datalist"]/tr[2]/td[2]/span/text()')
-        code_ = selector.xpath('//*[@id="datalist"]/tr[2]/td[1]/text()')
+        last_price = selector.xpath('//*[@id="table-box-futures-hq"]/tbody/tr[1]/td[1]/div/span[1]/text()')
+        code_ = selector.xpath('//*[@id="right"]/div[2]/span/text()')
         dt_dict = {}
-        dt_dict[code_[0]] = last_price[0]
-        print(last_price,code_)
+        dt_dict[code_[0][1:-1]] = last_price[0]
+        print(dt_dict)
         final_dt.append(dt_dict)
         # 完成当前URL任务
         self.url_queue.task_done()
@@ -89,7 +90,7 @@ def use_selenium_headless_getdt(url):
     # ch_options = PhantomJS("D:\\python3.10\\Scripts\\phantomjs.exe") # windows
     ch_options = PhantomJS() #linux
     ch_options.get(url)
-    time.sleep(3)
+    time.sleep(10)
     html = ch_options.page_source
     ch_options.close()
     return html
@@ -118,10 +119,9 @@ def list_dict(list_data):
         value, = i.values()
         dict_data[key] = value
     return dict_data
-
 def is_need_retry(exception:Exception)->bool:
     return isinstance(exception,func_timeout.exceptions.FunctionTimedOut)
-@timeout_decorator.timeout(30)
+@timeout_decorator.timeout(60)
 def collection_func():
     sst = ZG_Futures()
     sst.run()
@@ -131,7 +131,7 @@ def collection_func():
     # [{'rbm': '4960'}, {'TAM': '6182'}, {'im': '875.5'}, {'ppm': '8697'}, {'jmm': '3003.0'}, {'pm': '11470'}, {'mm': '4062'}, {'jm': '3799.5'}]
 
     # 异步之后还要排序
-    f_tuple = tuple([list_dict(final_dt)[x] for x in forSort_futurescode])
+    f_tuple = tuple([list_dict(final_dt)[x] for x in china_futurescode])
     print(f_tuple)
     # 每10秒插入一次
     insertDB([f_tuple])
@@ -141,12 +141,12 @@ def collection_func():
 
 if __name__=="__main__":
     s = datetime.datetime.now()
+
     final_dt =[]
     #制只锁定在 10个左右 # 内存太小了，所以这次先缩减在6-7
     # "豆油,"聚氯乙烯,"PTA,"螺纹钢,"棕榈油,"菜油,"豆粕,"甲醇,"聚乙烯"铁矿石,"玻璃"石油沥青,"苹果,
-    china_futurescode =["dcey","dcev","czceta","shrb","dcep","czceoi","dcem","czcema","dcel","dcei","czcefg","shbu","czceap"]
-    forSort_futurescode =["豆油主力","聚氯乙烯主力","PTA主力","螺纹钢主力","棕榈油主力","菜油主力","豆粕主力","甲醇主力","聚乙烯主力","铁矿石主力","玻璃主力","石油沥青主力","苹果主力"]
-    url_list = ["http://quote.stockstar.com/futures/{0}.html".format(x) for x in china_futurescode]
+    china_futurescode =["Y0","V0","TA0","RB0","P0","OI0","M0","MA0","L0","I0","FG0","BU0","AP0"]
+    url_list = ["https://finance.sina.com.cn/futures/quotes/{0}.shtml".format(x) for x in china_futurescode]
     collection_func()
 
 
@@ -155,7 +155,11 @@ if __name__=="__main__":
 
 
 
+# 计划任务 每30秒执行一次
 
+
+# *  21-23  * * 1-5  /usr/bin/python3 /root/Daily_fetch_dt.py
+# * 9-15  * * 1-5 /usr/bin/python3 /root/Daily_fetch_dt.py
 
 
 # create table ZN_Futures (id int not null primary key auto_increment,ym TEXT,vm TEXT,TAM TEXT,rbm TEXT,pm TEXT,OIM TEXT,mm TEXT,MAM TEXT,lm TEXT,im TEXT,FGM TEXT,bum TEXT,APM TEXT,LastTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP) engine=InnoDB  charset=utf8;

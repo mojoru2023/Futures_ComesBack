@@ -6,11 +6,14 @@ import pymysql
 from queue import Queue
 import threading
 import time
+
+import retrying
 from lxml import etree
 
 # selenium 3.12.0
 from selenium.webdriver import PhantomJS
 import sys
+import timeout_decorator
 
 def run_forever(func):
     def wrapper(obj):
@@ -82,6 +85,7 @@ def use_selenium_headless_getdt(url):
     #ch_options = PhantomJS("D:\\python3.10\\Scripts\\phantomjs.exe") # windows
     ch_options = PhantomJS() #linux
     ch_options.get(url)
+    time.sleep(3)
     html = ch_options.page_source
     ch_options.close()
     return html
@@ -109,31 +113,41 @@ def list_dict(list_data):
         key, = i
         value, = i.values()
         dict_data[key] = value
+
     return dict_data
+def is_need_retry(exception:Exception)->bool:
+    return isinstance(exception,func_timeout.exceptions.FunctionTimedOut)
+@timeout_decorator.timeout(30)
+def collection_func():
 
-if __name__=="__main__":
-    s = datetime.datetime.now()
-
-    final_dt =[]
-    #制只锁定在 10个左右 # 内存太小了，所以这次先缩减在6-7
-    china_futurescode =["ym","vm","TAM","rbm","pm","OIM","mm","MAM","lm","im","FGM","bum","APM"]
-
-    url_list = ["http://quote.eastmoney.com/qihuo/{0}.html".format(x) for x in china_futurescode]
     sst = ZG_Futures()
     sst.run()
-    e =  datetime.datetime.now()
-    f = e-s
+    e = datetime.datetime.now()
+    f = e - s
     print(final_dt)
 
-# "豆油,"聚氯乙烯,"PTA,"螺纹钢,"棕榈油,"菜油,"豆粕,"甲醇,"聚乙烯"铁矿石,"玻璃"石油沥青,"苹果,
- # 异步之后还要排序
+    # "豆油,"聚氯乙烯,"PTA,"螺纹钢,"棕榈油,"菜油,"豆粕,"甲醇,"聚乙烯"铁矿石,"玻璃"石油沥青,"苹果,
+    # 异步之后还要排序
     f_tuple = tuple([list_dict(final_dt)[x] for x in china_futurescode])
     print(f_tuple)
     # 每10秒插入一次
     insertDB([f_tuple])
     print(final_dt)
     print(f)
-    sys.exit(0)
+
+
+if __name__=="__main__":
+    s = datetime.datetime.now()
+
+    final_dt = []
+    # 制只锁定在 10个左右 # 内存太小了，所以这次先缩减在6-7
+    china_futurescode = ["ym", "vm", "TAM", "rbm", "pm", "OIM", "mm", "MAM", "lm", "im", "FGM", "bum", "APM"]
+
+    url_list = ["http://quote.eastmoney.com/qihuo/{0}.html".format(x) for x in china_futurescode]
+
+    collection_func()
+
+
 
 
 

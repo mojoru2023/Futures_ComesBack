@@ -1,23 +1,19 @@
-import itertools
-import sys
-import html
-from logging import Formatter, handlers, StreamHandler, getLogger, DEBUG
-import csv
-import os
-import time
-import copy
-import re
+#! -*- utf-8 -*-
+
 import datetime
 from itertools import chain
 import pymysql
 from queue import Queue
 import threading
+import time
 
+import retrying
 from lxml import etree
-
+from func_timeout import func_set_timeout
 # selenium 3.12.0
 from selenium.webdriver import PhantomJS
-
+import sys
+import func_timeout
 
 def run_forever(func):
     def wrapper(obj):
@@ -50,11 +46,12 @@ class ZG_Futures(object):
 
         html= use_selenium_headless_getdt(url)
         selector = etree.HTML(html)
-        last_price = selector.xpath('//*[@id="table-box-futures-hq"]/tbody/tr[1]/td[1]/div/span[1]/text()')
-        code_ = selector.xpath('//*[@id="right"]/div[2]/span/text()')
+        last_price = selector.xpath('//*[@id="last_last"]/text()')
+        code_ = selector.xpath('//*[@id="leftColumn"]/div[1]/h1/text()')
         dt_dict = {}
-        dt_dict[code_[0][1:-1]] = last_price[0]
-        print(dt_dict)
+        print(url)
+        dt_dict[code_[0]] = last_price[0]
+        print(last_price)
         final_dt.append(dt_dict)
         # 完成当前URL任务
         self.url_queue.task_done()
@@ -85,9 +82,10 @@ class ZG_Futures(object):
 
 
 def use_selenium_headless_getdt(url):
-    # ch_options = PhantomJS("D:\\python3.10\\Scripts\\phantomjs.exe") # windows
-    ch_options = PhantomJS() #linux
+    ch_options = PhantomJS("D:\\python3.10\\Scripts\\phantomjs.exe") # windows
+    #ch_options = PhantomJS() #linux
     ch_options.get(url)
+    time.sleep(3)
     html = ch_options.page_source
     ch_options.close()
     return html
@@ -115,51 +113,56 @@ def list_dict(list_data):
         key, = i
         value, = i.values()
         dict_data[key] = value
+
     return dict_data
+def is_need_retry(exception:Exception)->bool:
+    return isinstance(exception,func_timeout.exceptions.FunctionTimedOut)
+@retrying.retry(retry_on_exception=is_need_retry,stop_max_attempt_number=20,wait_fixed=2000)
+@func_set_timeout(60)
+def collection_func():
 
-if __name__=="__main__":
-    s = datetime.datetime.now()
-
-    final_dt =[]
-    #制只锁定在 10个左右 # 内存太小了，所以这次先缩减在6-7
-    # "豆油,"聚氯乙烯,"PTA,"螺纹钢,"棕榈油,"菜油,"豆粕,"甲醇,"聚乙烯"铁矿石,"玻璃"石油沥青,"苹果,
-    china_futurescode =["Y0","V0","TA0","RB0","P0","OI0","M0","MA0","L0","I0","FG0","BU0","AP0"]
-    url_list = ["https://finance.sina.com.cn/futures/quotes/{0}.shtml".format(x) for x in china_futurescode]
     sst = ZG_Futures()
     sst.run()
-    e =  datetime.datetime.now()
-    f = e-s
+    e = datetime.datetime.now()
+    f = e - s
     print(final_dt)
-# [{'rbm': '4960'}, {'TAM': '6182'}, {'im': '875.5'}, {'ppm': '8697'}, {'jmm': '3003.0'}, {'pm': '11470'}, {'mm': '4062'}, {'jm': '3799.5'}]
 
- # 异步之后还要排序
+    # "豆油,"聚氯乙烯,"PTA,"螺纹钢,"棕榈油,"菜油,"豆粕,"甲醇,"聚乙烯"铁矿石,"玻璃"石油沥青,"苹果,
+    # 异步之后还要排序
     f_tuple = tuple([list_dict(final_dt)[x] for x in china_futurescode])
     print(f_tuple)
     # 每10秒插入一次
     insertDB([f_tuple])
     print(final_dt)
     print(f)
-    sys.exit(0)
+
+
+if __name__=="__main__":
+    s = datetime.datetime.now()
+
+    final_dt = []
+    # 制只锁定在 10个左右 # 内存太小了，所以这次先缩减在6-7
+    china_futurescode = ["ym", "vm", "TAM", "rbm", "pm", "OIM", "mm", "MAM", "lm", "im", "FGM", "bum", "APM"]
+
+    url_list = ["https://www.investing.com/indices/us-30-futures-chart?cid=1175152"]
+
+    collection_func()
 
 
 
 
 
-
-# 计划任务 每30秒执行一次
-
-
-# *  21-23  * * 1-5  /usr/bin/python3 /root/Daily_fetch_dt.py
-# * 9-15  * * 1-5 /usr/bin/python3 /root/Daily_fetch_dt.py
 
 
 # create table ZN_Futures (id int not null primary key auto_increment,ym TEXT,vm TEXT,TAM TEXT,rbm TEXT,pm TEXT,OIM TEXT,mm TEXT,MAM TEXT,lm TEXT,im TEXT,FGM TEXT,bum TEXT,APM TEXT,LastTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP) engine=InnoDB  charset=utf8;
 
-# python接口说明   https://www.wenhua.com.cn/guide/jksm.htm
 
-# Funcat 将同花顺、通达信、文华财经等的公式移植到了 Python 中。
 
 
 # drop table ZN_Futures;
 
-# 插入数据库的问题
+# select * from ZN_Futures;
+
+# python接口说明   https://www.wenhua.com.cn/guide/jksm.htm
+
+# Funcat 将同花顺、通达信、文华财经等的公式移植到了 Python 中。

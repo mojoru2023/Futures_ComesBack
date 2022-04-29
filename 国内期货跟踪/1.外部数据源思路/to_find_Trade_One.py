@@ -85,8 +85,6 @@ def writeintotxt_file(filename,data):
     with open(filename,'a', newline='\n', encoding="utf-8") as f_output:
         tsv_output = csv.writer(f_output, delimiter=',')
         tsv_output.writerow(data)
-writeintotxt_file("put.txt",["put",-5])
-writeintotxt_file("put.txt",["call",66])
 
 def readDatafile(filename):
     line_list = []
@@ -123,11 +121,11 @@ def find_and_confirm_signal(tradeone,base_dt,base_dt_minus3,base_dt_minus30,trad
     if os.path.exists('call{0}.txt'.format(tradeone)) is False and os.path.exists('put{0}.txt'.format(tradeone)) is False:
         # 无文件,进行信号甄别;有文件,就验证信号
         find_signal_dt = base_dt-base_dt_minus30
-        find_signal_msg = "tradeone is {2} \n time: {1} \n 市场为 {0} ，发现信号！".format(str(find_signal_dt),datetime.now().strftime("%Y-%m-%d %H:%M:%S"),tradeone)
-        if find_signal_dt>trade_dict[tradeone]*find_param:
+        find_signal_msg = "tradeone is {2} \n time: {1} \n 市场为 {0} ，发现信号！".format(str(find_signal_dt),datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),tradeone)
+        if find_signal_dt> 0 and find_signal_dt>trade_dict[tradeone]*find_param:
             print(find_signal_msg)
             open('call{0}.txt'.format(tradeone), mode='w')
-        elif find_signal_dt < -trade_dict[tradeone]*find_param:
+        elif find_signal_dt <0 and  find_signal_dt<-trade_dict[tradeone]*find_param:
             print(find_signal_msg)
             open('put{0}.txt'.format(tradeone), mode='w')
         else:
@@ -136,33 +134,12 @@ def find_and_confirm_signal(tradeone,base_dt,base_dt_minus3,base_dt_minus30,trad
     else: #验证信号
         if os.path.exists('call{0}.txt'.format(tradeone)) is True:
             confirm_signal_dt = base_dt-base_dt_minus3
-            if confirm_signal_dt>0:
+            if confirm_signal_dt>0 :
                 # 写入文件
-                writeintotxt_file("call{0}.txt", ["call",confirm_signal_dt])
+                writeintotxt_file("call{0}.txt".format(tradeone), ["call",confirm_signal_dt])
                 # 读取文件
-                call_list, put_list, total_list = readDatafile("call{0}.txt")
-                msg1 = "本次判定信号是正确的！ 市场为 {0} ，考虑是否进场！".format(str(confirm_signal_dt))
-                msg2 = "判定信号 正确的数值为{0} ！".format(str(call_list))
-                msg3 = "判定信号 错误的数值为{0} ！".format(str(put_list))
-                msg4 = "判定信号 总计的数值为{0} ！".format(str(total_list))
-                print(msg1)
-                print(msg2)
-                print(msg3)
-                print(msg4)
-                if abs(put_list)-abs(call_list) >trade_dict[tradeone]*confirm_param:
-                    msg5 = "做多的信号彻底失败！赶紧离场！"
-                    print(msg5)
-                    remove_existfile("call{0}.txt")
-            elif confirm_signal_dt<0:
-                # 写入文件
-                writeintotxt_file("call{0}.txt", ["put",confirm_signal_dt])
-                # 读取文件
-                call_list, put_list, total_list = readDatafile("call{0}.txt")
-                # 1. 本次判定的信号的结果 ，和
-                # 2. 累积判定正确的信号的结果 ，和
-                # 3. 累积判定错误的信号的结果 ，和
-                # 4. 累积判定的信号的结果 ，和
-                # 5. 合计的 加上40点 还是为负说明信号彻底失效！ 删除txt文件
+                call_list, put_list, total_list = readDatafile("call{0}.txt".format(tradeone))
+                print("----------------信号是--call------{0}-----------------------------------".format(tradeone))
 
                 msg1 = "本次判定信号是正确的！ 市场为 {0} ，考虑是否进场！".format(str(confirm_signal_dt))
                 msg2 = "判定信号 正确的数值为{0} ！".format(str(call_list))
@@ -173,25 +150,44 @@ def find_and_confirm_signal(tradeone,base_dt,base_dt_minus3,base_dt_minus30,trad
                 print(msg3)
                 print(msg4)
                 if abs(put_list)-abs(call_list) >trade_dict[tradeone]*confirm_param:
-                    msg5 = "做多的信号彻底失败！赶紧离场！"
+                    msg5 = "{0}--------------做多的信号彻底失败！赶紧离场！".format(tradeone)
                     print(msg5)
-                    remove_existfile("call{0}.txt")
+                    remove_existfile("call{0}.txt".format(tradeone))
+            elif confirm_signal_dt<0:
+                # 写入文件
+                writeintotxt_file("call{0}.txt".format(tradeone), ["put",confirm_signal_dt])
+                # 读取文件
+                call_list, put_list, total_list = readDatafile("call{0}.txt".format(tradeone))
+                # 1. 本次判定的信号的结果 ，和
+                # 2. 累积判定正确的信号的结果 ，和
+                # 3. 累积判定错误的信号的结果 ，和
+                # 4. 累积判定的信号的结果 ，和
+                # 5. 合计的 加上40点 还是为负说明信号彻底失效！ 删除txt文件
+                print("---------------信号是--call-------{0}-----------------------------------".format(tradeone))
+                msg1 = "本次判定信号是错误的！ 市场为 {0} ，考虑是否进场！".format(str(confirm_signal_dt))
+                msg2 = "判定信号 正确的数值为{0} ！".format(str(call_list))
+                msg3 = "判定信号 错误的数值为{0} ！".format(str(put_list))
+                msg4 = "判定信号 总计的数值为{0} ！".format(str(total_list))
+                print(msg1)
+                print(msg2)
+                print(msg3)
+                print(msg4)
+                if abs(put_list)-abs(call_list) >trade_dict[tradeone]*confirm_param:
+                    msg5 = "{0}--------------做多的信号彻底失败！赶紧离场！".format(tradeone)
+                    print(msg5)
+                    remove_existfile("call{0}.txt".format(tradeone))
 
 
 
         # 读取文件信息,结合当次数据发送信号确认的情况。
         elif os.path.exists('put{0}.txt'.format(tradeone)) is True:
             confirm_signal_dt = base_dt-base_dt_minus3
-            if confirm_signal_dt>0:
+            if confirm_signal_dt<0:
                 # 写入文件
-                writeintotxt_file("put{0}.txt", ["call",confirm_signal_dt])
+                writeintotxt_file("put{0}.txt".format(tradeone), ["call",confirm_signal_dt])
                 # 读取文件
-                call_list, put_list, total_list = readDatafile("put{0}.txt")
-                # 1. 本次判定的信号的结果 ，和
-                # 2. 累积判定正确的信号的结果 ，和
-                # 3. 累积判定错误的信号的结果 ，和
-                # 4. 累积判定的信号的结果 ，和
-                # 5. 合计的 加上40点 还是为负说明信号彻底失效！ 删除txt文件
+                call_list, put_list, total_list = readDatafile("put{0}.txt".format(tradeone))
+                print("---------------信号是--put-------{0}-----------------------------------".format(tradeone))
 
                 msg1 = "本次判定信号是正确的！ 市场为 {0} ，考虑是否进场！".format(str(confirm_signal_dt))
                 msg2 = "判定信号 正确的数值为{0} ！".format(str(put_list))
@@ -202,21 +198,16 @@ def find_and_confirm_signal(tradeone,base_dt,base_dt_minus3,base_dt_minus30,trad
                 print(msg3)
                 print(msg4)
                 if abs(call_list)-abs(put_list) >trade_dict[tradeone]*confirm_param:
-                    msg5 = "做空的信号彻底失败！赶紧离场！"
+                    msg5 = "{0}-------做空的信号彻底失败！赶紧离场！".format(tradeone)
                     print(msg5)
-                    remove_existfile("put{0}.txt")
-            elif confirm_signal_dt<0:
+                    remove_existfile("put{0}.txt".format(tradeone))
+            elif confirm_signal_dt>0:
                 # 写入文件
-                writeintotxt_file("put{0}.txt", ["put",confirm_signal_dt])
+                writeintotxt_file("put{0}.txt".format(tradeone), ["put",confirm_signal_dt])
                 # 读取文件
-                call_list, put_list, total_list = readDatafile("put{0}.txt")
-                # 1. 本次判定的信号的结果 ，和
-                # 2. 累积判定正确的信号的结果 ，和
-                # 3. 累积判定错误的信号的结果 ，和
-                # 4. 累积判定的信号的结果 ，和
-                # 5. 合计的 加上40点 还是为负说明信号彻底失效！ 删除txt文件
-
-                msg1 = "本次判定信号是正确的！ 市场为 {0} ，考虑是否进场！".format(str(confirm_signal_dt))
+                call_list, put_list, total_list = readDatafile("put{0}.txt".format(tradeone))
+                print("---------------信号是--put-------{0}-----------------------------------".format(tradeone))
+                msg1 = "本次判定信号是错误的！ 市场为 {0} ，考虑是否进场！".format(str(confirm_signal_dt))
                 msg2 = "判定信号 正确的数值为{0} ！".format(str(put_list))
                 msg3 = "判定信号 错误的数值为{0} ！".format(str(call_list))
                 msg4 = "判定信号 总计的数值为{0} ！".format(str(total_list))
@@ -225,9 +216,9 @@ def find_and_confirm_signal(tradeone,base_dt,base_dt_minus3,base_dt_minus30,trad
                 print(msg3)
                 print(msg4)
                 if abs(call_list)-abs(put_list) >trade_dict[tradeone]*confirm_param:
-                    msg5 = "做空的信号彻底失败！赶紧离场！"
+                    msg5 = "{0}-------做空的信号彻底失败！赶紧离场！".format(tradeone)
                     print(msg5)
-                    remove_existfile("put{0}.txt")
+                    remove_existfile("put{0}.txt".format(tradeone))
 
 
 
@@ -245,6 +236,7 @@ def use_subprocess_command(command_string):
 if __name__=="__main__":
     # 开始时, 删除所有文本
     remove_file("txt")
+    time.sleep(2)
     trade_base_params_dict = {'ym': 106.43, 'vm': 125.85, 'TAM': 117, 'rbm': 70.31, 'pm': 122.95, 'OIM': 131.77,
                               'mm': 36.1, 'MAM': 31.176, 'lm': 197.95, 'im': 45.46, 'FGM': 101.4, 'bum': 62.533,
                               'APM': 117.53}
@@ -252,23 +244,21 @@ if __name__=="__main__":
         e = datetime.datetime.now()
         print(e)
         base_dt,base_dt_minus3_dt,base_dt_minus20_dt = fetch_basedt_minus3dt_minus20dt()
-        print(base_dt)
-        print(base_dt_minus3_dt)
-        print(base_dt_minus20_dt)
-        find_and_confirm_signal("ym",base_dt,base_dt_minus3_dt,base_dt_minus20_dt,trade_base_params_dict,0.22,0.13)
-        find_and_confirm_signal("vm",base_dt,base_dt_minus3_dt,base_dt_minus20_dt,trade_base_params_dict,0.22,0.13)
-        find_and_confirm_signal("TAM",base_dt,base_dt_minus3_dt,base_dt_minus20_dt,trade_base_params_dict,0.22,0.13)
-        find_and_confirm_signal("rbm",base_dt,base_dt_minus3_dt,base_dt_minus20_dt,trade_base_params_dict,0.22,0.13)
-        find_and_confirm_signal("pm",base_dt,base_dt_minus3_dt,base_dt_minus20_dt,trade_base_params_dict,0.22,0.13)
-        find_and_confirm_signal("OIM",base_dt,base_dt_minus3_dt,base_dt_minus20_dt,trade_base_params_dict,0.22,0.13)
-        find_and_confirm_signal("mm",base_dt,base_dt_minus3_dt,base_dt_minus20_dt,trade_base_params_dict,0.22,0.13)
-        find_and_confirm_signal("MAM",base_dt,base_dt_minus3_dt,base_dt_minus20_dt,trade_base_params_dict,0.22,0.13)
-        find_and_confirm_signal("lm",base_dt,base_dt_minus3_dt,base_dt_minus20_dt,trade_base_params_dict,0.22,0.13)
-        find_and_confirm_signal("im",base_dt,base_dt_minus3_dt,base_dt_minus20_dt,trade_base_params_dict,0.22,0.13)
-        find_and_confirm_signal("FGM",base_dt,base_dt_minus3_dt,base_dt_minus20_dt,trade_base_params_dict,0.22,0.13)
-        find_and_confirm_signal("bum",base_dt,base_dt_minus3_dt,base_dt_minus20_dt,trade_base_params_dict,0.22,0.13)
-        find_and_confirm_signal("APM",base_dt,base_dt_minus3_dt,base_dt_minus20_dt,trade_base_params_dict,0.22,0.13)
-        time.sleep(5)
+
+        find_and_confirm_signal("ym",float(base_dt[0]),float(base_dt_minus3_dt[0]),float(base_dt_minus20_dt[0]),trade_base_params_dict,0.22,0.13)
+        find_and_confirm_signal("vm",float(base_dt[1]),float(base_dt_minus3_dt[1]),float(base_dt_minus20_dt[1]),trade_base_params_dict,0.22,0.13)
+        find_and_confirm_signal("TAM",float(base_dt[2]),float(base_dt_minus3_dt[2]),float(base_dt_minus20_dt[2]),trade_base_params_dict,0.22,0.13)
+        find_and_confirm_signal("rbm",float(base_dt[3]),float(base_dt_minus3_dt[3]),float(base_dt_minus20_dt[3]),trade_base_params_dict,0.22,0.13)
+        find_and_confirm_signal("pm",float(base_dt[4]),float(base_dt_minus3_dt[4]),float(base_dt_minus20_dt[4]),trade_base_params_dict,0.22,0.13)
+        find_and_confirm_signal("OIM",float(base_dt[5]),float(base_dt_minus3_dt[5]),float(base_dt_minus20_dt[5]),trade_base_params_dict,0.22,0.13)
+        find_and_confirm_signal("mm",float(base_dt[6]),float(base_dt_minus3_dt[6]),float(base_dt_minus20_dt[6]),trade_base_params_dict,0.22,0.13)
+        find_and_confirm_signal("MAM",float(base_dt[7]),float(base_dt_minus3_dt[7]),float(base_dt_minus20_dt[7]),trade_base_params_dict,0.22,0.13)
+        find_and_confirm_signal("lm",float(base_dt[8]),float(base_dt_minus3_dt[8]),float(base_dt_minus20_dt[8]),trade_base_params_dict,0.22,0.13)
+        find_and_confirm_signal("im",float(base_dt[9]),float(base_dt_minus3_dt[9]),float(base_dt_minus20_dt[9]),trade_base_params_dict,0.22,0.13)
+        find_and_confirm_signal("FGM",float(base_dt[10]),float(base_dt_minus3_dt[10]),float(base_dt_minus20_dt[10]),trade_base_params_dict,0.22,0.13)
+        find_and_confirm_signal("bum",float(base_dt[11]),float(base_dt_minus3_dt[11]),float(base_dt_minus20_dt[11]),trade_base_params_dict,0.22,0.13)
+        find_and_confirm_signal("APM",float(base_dt[12]),float(base_dt_minus3_dt[12]),float(base_dt_minus20_dt[12]),trade_base_params_dict,0.22,0.13)
+        time.sleep(60)
 
 
 
