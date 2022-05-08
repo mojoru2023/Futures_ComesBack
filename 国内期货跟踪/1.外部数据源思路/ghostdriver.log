@@ -1,46 +1,5 @@
-[INFO  - 2022-04-29T02:20:39.733Z] GhostDriver - Main - running on port 7230
-[INFO  - 2022-04-29T02:20:45.007Z] Session [f9992b10-c762-11ec-95e6-ed6999bb192a] - page.settings - {"XSSAuditingEnabled":false,"javascriptCanCloseWindows":true,"javascriptCanOpenWindows":true,"javascriptEnabled":true,"loadImages":true,"localToRemoteUrlAccessEnabled":false,"userAgent":"Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/538.1 (KHTML, like Gecko) PhantomJS/2.1.1 Safari/538.1","webSecurityEnabled":true}
-[INFO  - 2022-04-29T02:20:45.008Z] Session [f9992b10-c762-11ec-95e6-ed6999bb192a] - page.customHeaders:  - {}
-[INFO  - 2022-04-29T02:20:45.008Z] Session [f9992b10-c762-11ec-95e6-ed6999bb192a] - Session.negotiatedCapabilities - {"browserName":"phantomjs","version":"2.1.1","driverName":"ghostdriver","driverVersion":"1.2.0","platform":"windows-10-32bit","javascriptEnabled":true,"takesScreenshot":true,"handlesAlerts":false,"databaseEnabled":false,"locationContextEnabled":false,"applicationCacheEnabled":false,"browserConnectionEnabled":false,"cssSelectorsEnabled":true,"webStorageEnabled":false,"rotatable":false,"acceptSslCerts":false,"nativeEvents":true,"proxy":{"proxyType":"direct"}}
-[INFO  - 2022-04-29T02:20:45.009Z] SessionManagerReqHand - _postNewSessionCommand - New Session Created: f9992b10-c762-11ec-95e6-ed6999bb192a
-[ERROR - 2022-04-29T02:20:47.605Z] Session [f9992b10-c762-11ec-95e6-ed6999bb192a] - page.onError - msg: ReferenceError: Can't find variable: dataLayerGTMParams
-
-  phantomjs://platform/console++.js:263 in error
-[ERROR - 2022-04-29T02:20:47.606Z] Session [f9992b10-c762-11ec-95e6-ed6999bb192a] - page.onError - stack:
-  global code (https://www.investing.com/indices/us-30-futures-chart?cid=1175152:24)
-
-  phantomjs://platform/console++.js:263 in error
-[ERROR - 2022-04-29T02:20:51.500Z] Session [f9992b10-c762-11ec-95e6-ed6999bb192a] - page.onError - msg: ReferenceError: Can't find variable: Set
-
-  phantomjs://platform/console++.js:263 in error
-[ERROR - 2022-04-29T02:20:51.500Z] Session [f9992b10-c762-11ec-95e6-ed6999bb192a] - page.onError - stack:
-  (anonymous function) (https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194:1)
-  t (https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194:1)
-  (anonymous function) (https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194:1)
-  t (https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194:1)
-  (anonymous function) (https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194:1)
-
-  phantomjs://platform/console++.js:263 in error
-[ERROR - 2022-04-29T02:20:55.840Z] Session [f9992b10-c762-11ec-95e6-ed6999bb192a] - page.onError - msg: ReferenceError: Can't find variable: Set
-
-  phantomjs://platform/console++.js:263 in error
-[ERROR - 2022-04-29T02:20:55.840Z] Session [f9992b10-c762-11ec-95e6-ed6999bb192a] - page.onError - stack:
-  (anonymous function) (https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194:1)
-  t (https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194:1)
-  (anonymous function) (https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194:1)
-  t (https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194:1)
-  (anonymous function) (https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194:1)
-
-  phantomjs://platform/console++.js:263 in error
-[ERROR - 2022-04-29T02:20:55.851Z] Session [f9992b10-c762-11ec-95e6-ed6999bb192a] - page.onError - msg: ReferenceError: Can't find variable: google
-
-  phantomjs://platform/console++.js:263 in error
-[ERROR - 2022-04-29T02:20:55.851Z] Session [f9992b10-c762-11ec-95e6-ed6999bb192a] - page.onError - stack:
-  onload (https://www.investing.com/indices/us-30-futures-chart?cid=1175152:602)
-  _create (https://tvc-invdn-com.investing.com/web/1.12.34/charting_library.min.js:1)
-  t (https://tvc-invdn-com.investing.com/web/1.12.34/charting_library.min.js:1)
-  (anonymous function) (:1)
-
-  phantomjs://platform/console++.js:263 in error
-[INFO  - 2022-04-29T02:25:39.680Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
-[INFO  - 2022-04-29T02:25:39.681Z] SessionManagerReqHand - _cleanupWindowlessSessions - Deleted Session 'f9992b10-c762-11ec-95e6-ed6999bb192a', because windowless
+[INFO  - 2022-05-05T03:07:53.110Z] GhostDriver - Main - running on port 13521
+[INFO  - 2022-05-05T03:07:57.639Z] Session [90766220-cc20-11ec-b634-410ea8428cc0] - page.settings - {"XSSAuditingEnabled":false,"javascriptCanCloseWindows":true,"javascriptCanOpenWindows":true,"javascriptEnabled":true,"loadImages":true,"localToRemoteUrlAccessEnabled":false,"userAgent":"Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/538.1 (KHTML, like Gecko) PhantomJS/2.1.1 Safari/538.1","webSecurityEnabled":true}
+[INFO  - 2022-05-05T03:07:57.639Z] Session [90766220-cc20-11ec-b634-410ea8428cc0] - page.customHeaders:  - {}
+[INFO  - 2022-05-05T03:07:57.639Z] Session [90766220-cc20-11ec-b634-410ea8428cc0] - Session.negotiatedCapabilities - {"browserName":"phantomjs","version":"2.1.1","driverName":"ghostdriver","driverVersion":"1.2.0","platform":"windows-10-32bit","javascriptEnabled":true,"takesScreenshot":true,"handlesAlerts":false,"databaseEnabled":false,"locationContextEnabled":false,"applicationCacheEnabled":false,"browserConnectionEnabled":false,"cssSelectorsEnabled":true,"webStorageEnabled":false,"rotatable":false,"acceptSslCerts":false,"nativeEvents":true,"proxy":{"proxyType":"direct"}}
+[INFO  - 2022-05-05T03:07:57.639Z] SessionManagerReqHand - _postNewSessionCommand - New Session Created: 90766220-cc20-11ec-b634-410ea8428cc0

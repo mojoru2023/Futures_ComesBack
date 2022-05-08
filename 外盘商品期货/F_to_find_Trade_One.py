@@ -36,12 +36,7 @@ import random
 from sqlalchemy import create_engine
 import pymysql
 import pandas as pd
-import smtplib
-from email.header import Header
-from email.mime.text import MIMEText
-from email.mime.image import MIMEImage
-from email.mime.multipart import MIMEMultipart
-from email.mime.application import MIMEApplication
+
 import datetime
 
 
@@ -62,7 +57,7 @@ def fetch_basedt_minus3dt_minus20dt():
 
     engine_ZN_Futures = create_engine('mysql+pymysql://root:123456@localhost:3306/Futures')
     # 逆序取数
-    sql_ZN_Futures = 'select * from ZN_Futures  order by id desc ; '
+    sql_ZN_Futures = 'select * from GF_Futures  order by id desc ; '
     # 取第一行数
     df_ZN_Futures = pd.read_sql_query(sql_ZN_Futures, engine_ZN_Futures)
     # 取第一行数
@@ -238,27 +233,21 @@ if __name__=="__main__":
     # 开始时, 删除所有文本
     remove_file("txt")
     time.sleep(2)
-    trade_base_params_dict = {'ym': 106.43, 'vm': 125.85, 'TAM': 117, 'rbm': 70.31, 'pm': 122.95, 'OIM': 131.77,
-                              'mm': 36.1, 'MAM': 31.176, 'lm': 197.95, 'im': 45.46, 'FGM': 101.4, 'bum': 62.533,
-                              'APM': 117.53}
+    trade_base_params_dict = {'ZS': 12.64,'ZC':6.8 ,'ZL':0.51 ,'ZM':4.7 ,'ZW':6.3364 ,'HG':0.0299 ,'SB':0.362 ,'CT':0.7885 }
     while True:
         e = datetime.datetime.now()
         print(e)
         base_dt,base_dt_minus3_dt,base_dt_minus20_dt = fetch_basedt_minus3dt_minus20dt()
 
-        find_and_confirm_signal("ym",float(base_dt[0]),float(base_dt_minus3_dt[0]),float(base_dt_minus20_dt[0]),trade_base_params_dict,0.22,0.13)
-        find_and_confirm_signal("vm",float(base_dt[1]),float(base_dt_minus3_dt[1]),float(base_dt_minus20_dt[1]),trade_base_params_dict,0.22,0.13)
-        find_and_confirm_signal("TAM",float(base_dt[2]),float(base_dt_minus3_dt[2]),float(base_dt_minus20_dt[2]),trade_base_params_dict,0.22,0.13)
-        find_and_confirm_signal("rbm",float(base_dt[3]),float(base_dt_minus3_dt[3]),float(base_dt_minus20_dt[3]),trade_base_params_dict,0.22,0.13)
-        find_and_confirm_signal("pm",float(base_dt[4]),float(base_dt_minus3_dt[4]),float(base_dt_minus20_dt[4]),trade_base_params_dict,0.22,0.13)
-        find_and_confirm_signal("OIM",float(base_dt[5]),float(base_dt_minus3_dt[5]),float(base_dt_minus20_dt[5]),trade_base_params_dict,0.22,0.13)
-        find_and_confirm_signal("mm",float(base_dt[6]),float(base_dt_minus3_dt[6]),float(base_dt_minus20_dt[6]),trade_base_params_dict,0.22,0.13)
-        #find_and_confirm_signal("MAM",float(base_dt[7]),float(base_dt_minus3_dt[7]),float(base_dt_minus20_dt[7]),trade_base_params_dict,0.22,0.13)
-        find_and_confirm_signal("lm",float(base_dt[8]),float(base_dt_minus3_dt[8]),float(base_dt_minus20_dt[8]),trade_base_params_dict,0.22,0.13)
-        #find_and_confirm_signal("im",float(base_dt[9]),float(base_dt_minus3_dt[9]),float(base_dt_minus20_dt[9]),trade_base_params_dict,0.22,0.13)
-        find_and_confirm_signal("FGM",float(base_dt[10]),float(base_dt_minus3_dt[10]),float(base_dt_minus20_dt[10]),trade_base_params_dict,0.22,0.13)
-        #find_and_confirm_signal("bum",float(base_dt[11]),float(base_dt_minus3_dt[11]),float(base_dt_minus20_dt[11]),trade_base_params_dict,0.22,0.13)
-        #find_and_confirm_signal("APM",float(base_dt[12]),float(base_dt_minus3_dt[12]),float(base_dt_minus20_dt[12]),trade_base_params_dict,0.22,0.13)
+        find_and_confirm_signal("ZS",float(base_dt[0]),float(base_dt_minus3_dt[0]),float(base_dt_minus20_dt[0]),trade_base_params_dict,0.22,0.13)
+        find_and_confirm_signal("ZC",float(base_dt[0]),float(base_dt_minus3_dt[0]),float(base_dt_minus20_dt[0]),trade_base_params_dict,0.22,0.13)
+        find_and_confirm_signal("ZL",float(base_dt[0]),float(base_dt_minus3_dt[0]),float(base_dt_minus20_dt[0]),trade_base_params_dict,0.22,0.13)
+        find_and_confirm_signal("ZM",float(base_dt[0]),float(base_dt_minus3_dt[0]),float(base_dt_minus20_dt[0]),trade_base_params_dict,0.22,0.13)
+        find_and_confirm_signal("ZW",float(base_dt[0]),float(base_dt_minus3_dt[0]),float(base_dt_minus20_dt[0]),trade_base_params_dict,0.22,0.13)
+        find_and_confirm_signal("HG",float(base_dt[0]),float(base_dt_minus3_dt[0]),float(base_dt_minus20_dt[0]),trade_base_params_dict,0.22,0.13)
+        find_and_confirm_signal("SB",float(base_dt[0]),float(base_dt_minus3_dt[0]),float(base_dt_minus20_dt[0]),trade_base_params_dict,0.22,0.13)
+        find_and_confirm_signal("CT",float(base_dt[0]),float(base_dt_minus3_dt[0]),float(base_dt_minus20_dt[0]),trade_base_params_dict,0.22,0.13)
+
         time.sleep(100)
         print("-"*100)
 

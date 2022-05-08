@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="32c8b34c-0fcd-41be-a05c-81855f16ac55" name="Default Changelist" comment="" />
+    <list default="true" id="32c8b34c-0fcd-41be-a05c-81855f16ac55" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/Futures_ComesBack.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Futures_ComesBack.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/国内期货跟踪/1.外部数据源思路/1.东方财富网/Daily_fetch_dt_DF.py" beforeDir="false" afterPath="$PROJECT_DIR$/国内期货跟踪/1.外部数据源思路/1.东方财富网/Daily_fetch_dt_DF.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/国内期货跟踪/1.外部数据源思路/1.东方财富网/ghostdriver.log" beforeDir="false" afterPath="$PROJECT_DIR$/国内期货跟踪/1.外部数据源思路/1.东方财富网/ghostdriver.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/国内期货跟踪/1.外部数据源思路/ghostdriver.log" beforeDir="false" afterPath="$PROJECT_DIR$/国内期货跟踪/1.外部数据源思路/ghostdriver.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/国内期货跟踪/1.外部数据源思路/t.py" beforeDir="false" afterPath="$PROJECT_DIR$/国内期货跟踪/1.外部数据源思路/t.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/国内期货跟踪/1.外部数据源思路/to_find_Trade_One.py" beforeDir="false" afterPath="$PROJECT_DIR$/国内期货跟踪/1.外部数据源思路/to_find_Trade_One.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,6 +46,9 @@
         <option value="$PROJECT_DIR$/A_M_Y/US/A_M_Y_Spread_USA.py" />
       </list>
     </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="164" />
@@ -86,12 +98,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/Futures_ComesBack/外盘商品期货",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Futures_ComesBack\clickCFD" />
+    </key>
   </component>
-  <component name="RunManager" selected="Python.Daily_fetch_dt_sina">
-    <configuration name="Daily_fetch_dt_DF" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.WithoutWechat_SPPlusNikki_confirmS_tradechoice">
+    <configuration name="WithoutWechat_SPPlusNikki_confirmS_tradechoice" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Futures_ComesBack" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -99,11 +120,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/国内期货跟踪/1.外部数据源思路/1.东方财富网" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../mql5_4/MQL &amp; python/7. 日经和标普标普同时监控" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/国内期货跟踪/1.外部数据源思路/1.东方财富网/Daily_fetch_dt_DF.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../mql5_4/MQL &amp; python/7. 日经和标普标普同时监控/WithoutWechat_SPPlusNikki_confirmS_tradechoice.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -112,7 +133,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Daily_fetch_dt_sina" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="click_CFD_J" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Futures_ComesBack" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -120,53 +141,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/国内期货跟踪/1.外部数据源思路/2.新浪财经" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/clickCFD" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/国内期货跟踪/1.外部数据源思路/2.新浪财经/Daily_fetch_dt_sina.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="get_compare_dt" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Futures_ComesBack" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/国内期货跟踪/1.外部数据源思路" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/国内期货跟踪/1.外部数据源思路/get_compare_dt.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="national_Futures.config" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Futures_ComesBack" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/国内期货跟踪/1.外部数据源思路" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/国内期货跟踪/1.外部数据源思路/national_Futures.config.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/clickCFD/click_CFD_J.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -196,13 +175,55 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="to_runcfd (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Futures_ComesBack" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/clickCFD" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/clickCFD/to_runcfd.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="to_runcfd" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Futures_ComesBack" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/国内期货跟踪/1.外部数据源思路/1.东方财富网" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="C:\Futures_ComesBack\clickCFD\to_runcfd.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.Daily_fetch_dt_sina" />
+        <item itemvalue="Python.WithoutWechat_SPPlusNikki_confirmS_tradechoice" />
         <item itemvalue="Python.t" />
-        <item itemvalue="Python.Daily_fetch_dt_DF" />
-        <item itemvalue="Python.national_Futures.config" />
-        <item itemvalue="Python.get_compare_dt" />
+        <item itemvalue="Python.to_runcfd (1)" />
+        <item itemvalue="Python.to_runcfd" />
+        <item itemvalue="Python.click_CFD_J" />
       </list>
     </recent_temporary>
   </component>
@@ -253,7 +274,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/豆粕-豆油(长期跟踪模型)/国际粕油/M_Y_Spread_China.py" />

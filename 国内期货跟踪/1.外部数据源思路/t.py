@@ -9,11 +9,11 @@ import time
 
 import retrying
 from lxml import etree
-from func_timeout import func_set_timeout
+
 # selenium 3.12.0
 from selenium.webdriver import PhantomJS
 import sys
-import func_timeout
+import timeout_decorator
 
 def run_forever(func):
     def wrapper(obj):
@@ -46,12 +46,12 @@ class ZG_Futures(object):
 
         html= use_selenium_headless_getdt(url)
         selector = etree.HTML(html)
-        last_price = selector.xpath('//*[@id="last_last"]/text()')
-        code_ = selector.xpath('//*[@id="leftColumn"]/div[1]/h1/text()')
+        last_price = selector.xpath('//*[@id="app"]/div/div/div[8]/div[1]/div/div[1]/span[1]/span/text()')
+        code_ = selector.xpath('//*[@id="app"]/div/div/div[7]/div/div[1]/span[2]/text()')
         dt_dict = {}
         print(url)
         dt_dict[code_[0]] = last_price[0]
-        print(last_price)
+        print(dt_dict)
         final_dt.append(dt_dict)
         # 完成当前URL任务
         self.url_queue.task_done()
@@ -82,7 +82,7 @@ class ZG_Futures(object):
 
 
 def use_selenium_headless_getdt(url):
-    ch_options = PhantomJS("D:\\python3.10\\Scripts\\phantomjs.exe") # windows
+    ch_options = PhantomJS("C:\\Python310\\Scripts\\phantomjs.exe") # windows
     #ch_options = PhantomJS() #linux
     ch_options.get(url)
     time.sleep(3)
@@ -115,10 +115,8 @@ def list_dict(list_data):
         dict_data[key] = value
 
     return dict_data
-def is_need_retry(exception:Exception)->bool:
-    return isinstance(exception,func_timeout.exceptions.FunctionTimedOut)
-@retrying.retry(retry_on_exception=is_need_retry,stop_max_attempt_number=20,wait_fixed=2000)
-@func_set_timeout(60)
+
+
 def collection_func():
 
     sst = ZG_Futures()
@@ -143,9 +141,7 @@ if __name__=="__main__":
     final_dt = []
     # 制只锁定在 10个左右 # 内存太小了，所以这次先缩减在6-7
     china_futurescode = ["ym", "vm", "TAM", "rbm", "pm", "OIM", "mm", "MAM", "lm", "im", "FGM", "bum", "APM"]
-
-    url_list = ["https://www.investing.com/indices/us-30-futures-chart?cid=1175152"]
-
+    url_list = ["http://quote.eastmoney.com/qihuo/{0}.html".format(x) for x in china_futurescode]
     collection_func()
 
 
@@ -166,3 +162,23 @@ if __name__=="__main__":
 # python接口说明   https://www.wenhua.com.cn/guide/jksm.htm
 
 # Funcat 将同花顺、通达信、文华财经等的公式移植到了 Python 中。
+
+
+
+
+LoadFile "c:/python3.5.4/python35.dll"
+LoadModule wsgi_module "c:/python3.5.4/lib/site-packages/mod_wsgi/server/mod_wsgi.cp35-win32.pyd"
+WSGIPythonHome "c:/python3.5.4"
+
+
+
+<VirtualHost *>
+    ServerName mytest.com
+    WSGIScriptAlias / C:\mytest\mytest.wsgi
+    <Directory C:\mytest\>
+        Require all granted
+    </Directory>
+</VirtualHost>
+
+
+# http://localhost:8080/mytest

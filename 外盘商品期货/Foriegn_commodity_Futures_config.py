@@ -10,9 +10,5 @@ COMEX铜HG00Y
 棕榈油当月连续MPM00Y
 
 
-https://cn.investing.com/commodities/us-sugar-no11
-  
-  
-  http://quote.eastmoney.com/globalfuture/SB00Y.html
-    
-    http://finance.sina.com.cn/money/future/hf.html
+
+

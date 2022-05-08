@@ -1,6 +1,7 @@
 #! -*- utf-8 -*-
 
 import datetime
+import re
 from itertools import chain
 import pymysql
 from queue import Queue
@@ -15,6 +16,22 @@ from selenium.webdriver import PhantomJS
 import sys
 import timeout_decorator
 
+def use_selenium_headless_getdt(url):
+    # ch_options = PhantomJS("C:\\Python310\\Scripts\\phantomjs.exe") # windows
+    ch_options = PhantomJS() #linux
+    ch_options.get(url)
+    currentPageUrl = ch_options.current_url
+    html = ch_options.page_source
+    ch_options.close()
+    return html,currentPageUrl
+
+
+def get_FCPO_dt_fromDF():
+    url ="http://quote.eastmoney.com/center/gridlist2.html#futures_110_1"
+    html = use_selenium_headless_getdt(url)
+    patt=re.compile('<a href="//quote.eastmoney.com/unify/r/110.MPM00Y">棕榈油当月连续</a></td><td class=".*?"><span class=".*?">(.*?)</span></td>',re.S)
+    items = re.findall(patt,str(html))
+    return items
 def run_forever(func):
     def wrapper(obj):
         while True:
@@ -44,10 +61,12 @@ class ZG_Futures(object):
         ''' 发送请求获取数据 '''
         url = self.url_queue.get()
 
-        html= use_selenium_headless_getdt(url)
-        selector = etree.HTML(html)
-        last_price = selector.xpath('//*[@id="app"]/div/div/div[8]/div[1]/div/div[1]/span[1]/span/text()')
-        code_ = selector.xpath('//*[@id="app"]/div/div/div[7]/div/div[1]/span[2]/text()')
+        html,currentPageUrl= use_selenium_headless_getdt(url)
+        patt = re.compile('<span class="text-2xl" data-test="instrument-price-last">(.*?)</span>',re.S)
+        last_price = re.findall(patt,html)
+        code_ = [currentPageUrl.split("/")[-1]]
+        print(code_,last_price)
+        print(currentPageUrl)
         dt_dict = {}
         print(url)
         dt_dict[code_[0]] = last_price[0]
@@ -55,6 +74,7 @@ class ZG_Futures(object):
         final_dt.append(dt_dict)
         # 完成当前URL任务
         self.url_queue.task_done()
+
 
 
 
@@ -76,30 +96,21 @@ class ZG_Futures(object):
 
 
 
-
-
-
-
-
-def use_selenium_headless_getdt(url):
-    #ch_options = PhantomJS("C:\\Python310\\Scripts\\phantomjs.exe") # windows
-    ch_options = PhantomJS() #linux
-    ch_options.get(url)
-    time.sleep(3)
-    html = ch_options.page_source
-    ch_options.close()
-    return html
-
-
+def remove_dot(*args):
+    big_list =[]
+    for item in args:
+        item = "".join(item.split(","))
+        big_list.append(item)
+    return big_list
 
 def insertDB(content):
     connection = pymysql.connect(host='127.0.0.1', port=3306, user='root', password='123456', db='Futures',
                                  charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
     cursor = connection.cursor()
     try:
-        f_ls = "%s," * (13)
+        f_ls = "%s," * (8)
         print(len(f_ls[:-1].split(",")))
-        cursor.executemany('insert into ZN_Futures (ym,vm,TAM,rbm,pm,OIM,mm,MAM,lm,im,FGM,bum,APM) values ({0})'.format(f_ls[:-1]),content)
+        cursor.executemany('insert into GF_Futures (ZS, ZC, ZL, ZM , ZW, HG, SB, CT) values ({0})'.format(f_ls[:-1]),content)
         connection.commit()
         connection.commit()
         connection.close()
@@ -116,7 +127,7 @@ def list_dict(list_data):
 
     return dict_data
 
-@timeout_decorator.timeout(30)
+#@timeout_decorator.timeout(30)
 def collection_func():
 
     sst = ZG_Futures()
@@ -125,9 +136,10 @@ def collection_func():
     f = e - s
     print(final_dt)
 
-    # "豆油,"聚氯乙烯,"PTA,"螺纹钢,"棕榈油,"菜油,"豆粕,"甲醇,"聚乙烯"铁矿石,"玻璃"石油沥青,"苹果,
+
     # 异步之后还要排序
-    f_tuple = tuple([list_dict(final_dt)[x] for x in china_futurescode])
+    f_tuple = tuple([list_dict(final_dt)[x] for x in global_futurescode])
+    f_tuple = tuple(["".join(x.split(",")) for x in f_tuple])
     print(f_tuple)
     # 每10秒插入一次
     insertDB([f_tuple])
@@ -136,29 +148,37 @@ def collection_func():
 
 
 if __name__=="__main__":
-    s = datetime.datetime.now()
+    while True:
 
-    final_dt = []
-    # 制只锁定在 10个左右 # 内存太小了，所以这次先缩减在6-7
-    china_futurescode = ["ym", "vm", "TAM", "rbm", "pm", "OIM", "mm", "MAM", "lm", "im", "FGM", "bum", "APM"]
-    url_list = ["http://quote.eastmoney.com/qihuo/{0}.html".format(x) for x in china_futurescode]
-    collection_func()
+        s = datetime.datetime.now()
 
-
-
-
+        final_dt = []
+        # 制只锁定在 10个左右 # 内存太小了，所以这次先缩减在6-7
+        global_futurescode = ["us-soybeans", "us-corn", "us-soybean-oil", "us-soybean-meal", "us-wheat", "copper", "us-sugar-no11", "us-cotton-no.2"]
+        url_list = ["https://cn.investing.com/commodities/{0}".format(x) for x in global_futurescode]
+        collection_func()
 
 
 
-# create table ZN_Futures (id int not null primary key auto_increment,ym TEXT,vm TEXT,TAM TEXT,rbm TEXT,pm TEXT,OIM TEXT,mm TEXT,MAM TEXT,lm TEXT,im TEXT,FGM TEXT,bum TEXT,APM TEXT,LastTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP) engine=InnoDB  charset=utf8;
+
+
+
+
+
+
+# ZS, ZC, ZL, ZM , ZW, HG, SB, CT
+
+# create table GF_Futures (id int not null primary key auto_increment,ZS TEXT, ZC TEXT, ZL TEXT, ZM TEXT, ZW TEXT, HG TEXT, SB TEXT, CT TEXT, LastTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP) engine=InnoDB  charset=utf8;
 
 
 
 
 # drop table ZN_Futures;
 
-# select * from ZN_Futures;
+# select * from GF_Futures;
 
 # python接口说明   https://www.wenhua.com.cn/guide/jksm.htm
 
 # Funcat 将同花顺、通达信、文华财经等的公式移植到了 Python 中。
+
+# <a href="//quote.eastmoney.com/unify/r/110.MPM00Y">棕榈油当月连续</a></td><td class=".*?"><span class=".*?">(.*?)</span></td>

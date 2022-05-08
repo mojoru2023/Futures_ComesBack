@@ -97,9 +97,9 @@ def insertDB(content):
                                  charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
     cursor = connection.cursor()
     try:
-        f_ls = "%s," * (13)
+        f_ls = "%s," * (8)
         print(len(f_ls[:-1].split(",")))
-        cursor.executemany('insert into ZN_Futures (ym,vm,TAM,rbm,pm,OIM,mm,MAM,lm,im,FGM,bum,APM) values ({0})'.format(f_ls[:-1]),content)
+        cursor.executemany('insert into GF_Futures (ZS, ZC, ZL, ZM , ZW, HG, SB, CT) values ({0})'.format(f_ls[:-1]),content)
         connection.commit()
         connection.commit()
         connection.close()
@@ -125,9 +125,9 @@ def collection_func():
     f = e - s
     print(final_dt)
 
-    # "豆油,"聚氯乙烯,"PTA,"螺纹钢,"棕榈油,"菜油,"豆粕,"甲醇,"聚乙烯"铁矿石,"玻璃"石油沥青,"苹果,
+
     # 异步之后还要排序
-    f_tuple = tuple([list_dict(final_dt)[x] for x in china_futurescode])
+    f_tuple = tuple([list_dict(final_dt)[x] for x in global_futurescode])
     print(f_tuple)
     # 每10秒插入一次
     insertDB([f_tuple])
@@ -140,8 +140,8 @@ if __name__=="__main__":
 
     final_dt = []
     # 制只锁定在 10个左右 # 内存太小了，所以这次先缩减在6-7
-    china_futurescode = ["ym", "vm", "TAM", "rbm", "pm", "OIM", "mm", "MAM", "lm", "im", "FGM", "bum", "APM"]
-    url_list = ["http://quote.eastmoney.com/qihuo/{0}.html".format(x) for x in china_futurescode]
+    global_futurescode = ["ZS00Y", "ZC00Y", "ZL00Y", "ZM00Y", "ZW00Y", "HG00Y", "SB00Y", "CT00Y"]
+    url_list = ["https://quote.eastmoney.com/globalfuture/{0}.html".format(x) for x in global_futurescode]
     collection_func()
 
 
@@ -150,14 +150,15 @@ if __name__=="__main__":
 
 
 
-# create table ZN_Futures (id int not null primary key auto_increment,ym TEXT,vm TEXT,TAM TEXT,rbm TEXT,pm TEXT,OIM TEXT,mm TEXT,MAM TEXT,lm TEXT,im TEXT,FGM TEXT,bum TEXT,APM TEXT,LastTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP) engine=InnoDB  charset=utf8;
+
+# create table GF_Futures (id int not null primary key auto_increment,ZS TEXT, ZC TEXT, ZL TEXT, ZM TEXT, ZW TEXT, HG TEXT, SB TEXT, CT TEXT, LastTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP) engine=InnoDB  charset=utf8;
 
 
 
 
-# drop table ZN_Futures;
+# drop table GF_Futures;
 
-# select * from ZN_Futures;
+# select * from GF_Futures;
 
 # python接口说明   https://www.wenhua.com.cn/guide/jksm.htm
 
