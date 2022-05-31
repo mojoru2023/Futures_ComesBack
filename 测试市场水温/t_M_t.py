@@ -1,4 +1,5 @@
 
+
 #! -*- utf-8 -*-
 
 import datetime
@@ -29,22 +30,22 @@ def test_M_temp():
     ch_options.close()
     selector = etree.HTML(html)
     last_price = selector.xpath('//*[@id="app"]/div/div/div[8]/div[1]/div/div[1]/span[1]/span/text()')
-    open_price = selector.xpath('//*[@id="app"]/div/div/div[7]/div[2]/ul[1]/li[1]/span[2]/span/text()')
+    yest_close_price = selector.xpath('//*[@id="app"]/div/div/div[7]/div[2]/ul[1]/li[2]/span[2]/span/text()')
     max_price = selector.xpath('//*[@id="app"]/div/div/div[7]/div[2]/ul[1]/li[3]/span[2]/span/text()')
     min_price = selector.xpath('//*[@id="app"]/div/div/div[7]/div[2]/ul[1]/li[4]/span[2]/span/text()')
 
     max_min = int(max_price[0]) -int(min_price[0])
-    max_open = int(max_price[0]) -int(open_price[0])
-    min_open = int(min_price[0]) -int(open_price[0])
-    last_open = int(last_price[0]) -int(open_price[0])
-    return max_min,max_open,min_open,last_open
+    max_yest_close_price = int(max_price[0]) -int(yest_close_price[0])
+    min_yest_close_price = int(min_price[0]) -int(yest_close_price[0])
+    last_yest_close_price = int(last_price[0]) -int(yest_close_price[0])
+    return max_min,max_yest_close_price,min_yest_close_price,last_yest_close_price
 
 
 
 
 
 if __name__=="__main__":
-    max_min, max_open, min_open, last_open = test_M_temp()
+    max_min,max_yest_close_price,min_yest_close_price,last_yest_close_price = test_M_temp()
 
 
 
