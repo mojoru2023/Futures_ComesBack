@@ -110,9 +110,9 @@ if __name__ == '__main__':
     dt_tuple_list = []
     # 数据库名称和表名
     db_name = 'us_invest.db'
-    table_name = 'nas100_index'
+    table_name = 'sp500_index'
 
-    url = 'https://finance.yahoo.com/quote/%5EIXIC/history/'
+    url = 'https://finance.yahoo.com/quote/%5EGSPC/history/'
     html_doc = fetch_data(url)
 
     element = etree.HTML(html_doc)
